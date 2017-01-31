@@ -15,7 +15,7 @@
 
     <Button
         android:text="@string/ok"
-        android:layout_width="190dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:id="@+id/dialog_ok"
         android:layout_below="@+id/dialog_text"
@@ -24,7 +24,7 @@
 
     <Button
         android:text="@string/cancel"
-        android:layout_width="190dp"
+        android:layout_width="140dp"
         android:layout_height="wrap_content"
         android:id="@+id/dialog_cancel"
         android:layout_below="@+id/dialog_text"

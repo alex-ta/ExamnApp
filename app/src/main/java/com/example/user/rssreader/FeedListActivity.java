@@ -5,19 +5,29 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ListViewCompat;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
 import com.example.user.rssreader.dialog.RssDialog;
-import com.example.user.rssreader.dummy.DummyContent;
+import com.example.user.rssreader.rssreader.Reader;
+import com.example.user.rssreader.rssreader.RssHolder;
+import com.example.user.rssreader.rssreader.RssListviewAdapter;
 
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,11 +40,6 @@ import java.util.List;
  */
 public class FeedListActivity extends AppCompatActivity {
 
-    /**
-     * Whether or not the activity is in two-pane mode, i.e. running on a tablet
-     * device.
-     */
-    private boolean mTwoPane;
     private RssDialog dialog;
 
 
@@ -43,6 +48,21 @@ public class FeedListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_list);
         dialog = new RssDialog(this);
+
+        RssHolder h = new RssHolder();
+        h.setDate(new Date());
+        h.setDescription("Some Description");
+        h.setLink("www.google.de");
+        h.setTitle("Some Title");
+        try {
+            new Reader(null).start();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        final RssListviewAdapter adapter = new RssListviewAdapter(this);
+        adapter.add(h);
+
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -53,91 +73,35 @@ public class FeedListActivity extends AppCompatActivity {
                 dialog.show();
             }
         });
+        toolbar.setLogo(R.mipmap.ic_launcher);
+
+        ListView listview = (ListView) findViewById(R.id.feed_listview);
+        listview.setAdapter(adapter);
 
 
-        View recyclerView = findViewById(R.id.feed_list);
-        assert recyclerView != null;
-        setupRecyclerView((RecyclerView) recyclerView);
-
-        if (findViewById(R.id.feed_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-w900dp).
-            // If this view is present, then the
-            // activity should be in two-pane mode.
-            mTwoPane = true;
-        }
-    }
-
-    private void setupRecyclerView(@NonNull RecyclerView recyclerView) {
-        recyclerView.setAdapter(new SimpleItemRecyclerViewAdapter(DummyContent.ITEMS));
-    }
-
-    public class SimpleItemRecyclerViewAdapter
-            extends RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder> {
-
-        private final List<DummyContent.DummyItem> mValues;
-
-        public SimpleItemRecyclerViewAdapter(List<DummyContent.DummyItem> items) {
-            mValues = items;
-        }
-
-        @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.feed_list_content, parent, false);
-            return new ViewHolder(view);
-        }
-
-        @Override
-        public void onBindViewHolder(final ViewHolder holder, int position) {
-            holder.mItem = mValues.get(position);
-            holder.mIdView.setText(mValues.get(position).id);
-            holder.mContentView.setText(mValues.get(position).content);
-
-            holder.mView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (mTwoPane) {
-                        Bundle arguments = new Bundle();
-                        arguments.putString(FeedDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-                        FeedDetailFragment fragment = new FeedDetailFragment();
-                        fragment.setArguments(arguments);
-                        getSupportFragmentManager().beginTransaction()
-                                .replace(R.id.feed_detail_container, fragment)
-                                .commit();
-                    } else {
-                        Context context = v.getContext();
-                        Intent intent = new Intent(context, FeedDetailActivity.class);
-                        intent.putExtra(FeedDetailFragment.ARG_ITEM_ID, holder.mItem.id);
-
-                        context.startActivity(intent);
-                    }
-                }
-            });
-        }
-
-        @Override
-        public int getItemCount() {
-            return mValues.size();
-        }
-
-        public class ViewHolder extends RecyclerView.ViewHolder {
-            public final View mView;
-            public final TextView mIdView;
-            public final TextView mContentView;
-            public DummyContent.DummyItem mItem;
-
-            public ViewHolder(View view) {
-                super(view);
-                mView = view;
-                mIdView = (TextView) view.findViewById(R.id.id);
-                mContentView = (TextView) view.findViewById(R.id.content);
-            }
-
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public String toString() {
-                return super.toString() + " '" + mContentView.getText() + "'";
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                RssHolder holder = adapter.getItem(position);
+                Intent inte = new Intent(FeedListActivity.this, FeedDetailActivity.class);
+                inte.putExtra(getApplicationContext().getString(R.string.intent_list_key),holder);
+                startActivity(inte);
             }
+        });
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId() == R.id.rss_menu){
+                dialog.show();
         }
+        return super.onOptionsItemSelected(item);
     }
 }

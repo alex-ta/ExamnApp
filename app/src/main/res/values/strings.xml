@@ -5,7 +5,7 @@
     <string name="text_rss_dialog">Please insert a RSS resource</string>
     <string name="preference_shared_key">RSSSHAREPREFFOREXAMNAPP</string>
     <string name="preference_rss_key">RSSURLFOREXAMNAPP</string>
-
+    <string name="intent_list_key">INTENTKEYLISTVIEW</string>
 
 
     <string name="ok">Ok</string>
