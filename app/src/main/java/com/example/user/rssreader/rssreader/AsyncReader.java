@@ -1,8 +1,12 @@
 package com.example.user.rssreader.rssreader;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ProgressBar;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
@@ -19,9 +23,11 @@ import java.util.List;
 public class AsyncReader extends AsyncTask<URL,URL,List<RssHolder>> {
 
     private ArrayAdapter<RssHolder> adapter;
+    private ProgressBar progress;
 
-    public AsyncReader(ArrayAdapter<RssHolder> adapter){
+    public AsyncReader(ArrayAdapter<RssHolder> adapter, ProgressBar bar){
         this.adapter = adapter;
+        this.progress = bar;
     }
 
     @Override
@@ -93,5 +99,12 @@ public class AsyncReader extends AsyncTask<URL,URL,List<RssHolder>> {
         adapter.clear();
         adapter.addAll(rssHolders);
         adapter.notifyDataSetChanged();
+        progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        progress.setVisibility(View.VISIBLE);
     }
 }

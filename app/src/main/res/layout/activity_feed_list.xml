@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.example.user.rssreader.FeedListActivity">
@@ -21,7 +21,15 @@
             app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar" />
 
     </android.support.design.widget.AppBarLayout>
-
+    <ProgressBar
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/progress_padding"
+        android:background="@android:color/transparent"
+        android:id="@+id/progressBar"
+        android:visibility="gone"
+        android:progressDrawable="@drawable/circle" />
     <ListView
         android:id="@+id/feed_listview"
         android:layout_width="match_parent"

@@ -1,6 +1,7 @@
 package com.example.user.rssreader;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,10 +10,14 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.example.user.rssreader.dialog.RssDialog;
+import com.example.user.rssreader.dialog.RssSharedPreferences;
+import com.example.user.rssreader.dialog.RssToast;
 import com.example.user.rssreader.rssreader.RssHolder;
 import com.example.user.rssreader.rssreader.RssListviewAdapter;
 import com.example.user.rssreader.rssreader.RssReader;
@@ -35,8 +40,8 @@ public class FeedListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_list);
         final RssListviewAdapter adapter = new RssListviewAdapter(this);
-        dialog = new RssDialog(this, new RssReader(adapter));
-
+        ProgressBar spinner=(ProgressBar)findViewById(R.id.progressBar);
+        dialog = new RssDialog(this, new RssReader(adapter, spinner));
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,6 +68,54 @@ public class FeedListActivity extends AppCompatActivity {
                 startActivity(inte);
             }
         });
+        checkEmptyUrl();
+    }
+
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        //
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        //
+    }
+
+
+
+
+    private void checkEmptyUrl(){
+        if(RssSharedPreferences.getInstance(this).readUrl().isEmpty()){
+            dialog.show();
+            new RssToast(this).setText("Please enter an proper rss url").show();
+        }
     }
 
 

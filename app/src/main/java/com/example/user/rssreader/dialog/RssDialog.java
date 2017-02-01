@@ -1,5 +1,6 @@
 package com.example.user.rssreader.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.View;
@@ -25,7 +26,7 @@ public class RssDialog extends Dialog{
     private final Button cancel;
     private final RssReader reader;
 
-    public RssDialog(final Context ctx, RssReader _reader){
+    public RssDialog(final Activity ctx, RssReader _reader){
         super(ctx);
         this.reader = _reader;
         this.setTitle(R.string.title_rss_dialog);
