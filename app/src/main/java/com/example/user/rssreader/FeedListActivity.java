@@ -1,35 +1,21 @@
 package com.example.user.rssreader;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.ListViewCompat;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 
 import com.example.user.rssreader.dialog.RssDialog;
-import com.example.user.rssreader.rssreader.AsyncReader;
-import com.example.user.rssreader.rssreader.Reader;
 import com.example.user.rssreader.rssreader.RssHolder;
 import com.example.user.rssreader.rssreader.RssListviewAdapter;
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import com.example.user.rssreader.rssreader.RssReader;
 
 /**
  * An activity representing a list of Feeds. This activity
@@ -48,16 +34,8 @@ public class FeedListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_list);
-        dialog = new RssDialog(this);
-
-        RssHolder h = new RssHolder();
-        h.setDescription("Some Description");
-        h.setLink("www.google.de");
-        h.setTitle("Some Title");
-        new AsyncReader().execute("http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml");
-
         final RssListviewAdapter adapter = new RssListviewAdapter(this);
-        adapter.add(h);
+        dialog = new RssDialog(this, new RssReader(adapter));
 
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -72,8 +50,9 @@ public class FeedListActivity extends AppCompatActivity {
         toolbar.setLogo(R.mipmap.ic_launcher);
 
         ListView listview = (ListView) findViewById(R.id.feed_listview);
-        listview.setAdapter(adapter);
 
+        listview.setEmptyView(findViewById(R.id.empty_list_view));
+        listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

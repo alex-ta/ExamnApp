@@ -1,12 +1,7 @@
 package com.example.user.rssreader.rssreader;
 
 import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +9,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.user.rssreader.R;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -32,7 +25,6 @@ public class RssListviewAdapter extends ArrayAdapter<RssHolder>{
         super(context, R.layout.activity_single_line);
         this.list = new ArrayList<RssHolder>();
     }
-
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {

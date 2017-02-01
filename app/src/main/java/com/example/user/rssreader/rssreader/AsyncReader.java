@@ -16,7 +16,7 @@ import java.util.List;
  * Created by User on 31.01.2017.
  */
 
-public class AsyncReader extends AsyncTask<String,String, List<RssHolder>> {
+public class AsyncReader extends AsyncTask<URL,URL,List<RssHolder>> {
 
     private ArrayAdapter<RssHolder> adapter;
 
@@ -25,10 +25,10 @@ public class AsyncReader extends AsyncTask<String,String, List<RssHolder>> {
     }
 
     @Override
-    protected List<RssHolder> doInBackground(String... params){
+    protected List<RssHolder> doInBackground(URL... params){
         LinkedList<RssHolder> list = new LinkedList<RssHolder>();
         try {
-            URL url = new URL(params[0]);
+            URL url = params[0];
             XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
             factory.setNamespaceAware(false);
             XmlPullParser xpp = factory.newPullParser();
@@ -77,7 +77,6 @@ public class AsyncReader extends AsyncTask<String,String, List<RssHolder>> {
                         }
                         break;
                     default:
-                        Log.d(""+xpp.getName(),""+xpp.getText());
                         break;
                 }
                 eventType = xpp.next();

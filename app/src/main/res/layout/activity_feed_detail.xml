@@ -1,17 +1,17 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.example.user.rssreader.FeedDetailActivity"
-    tools:ignore="MergeRootFrame">
+    android:orientation="vertical"
+    tools:context="com.example.user.rssreader.FeedDetailActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:navigationIcon="@drawable/wifi"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
 
         <android.support.v7.widget.Toolbar
@@ -26,39 +26,39 @@
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_date"
-        android:layout_below="@+id/app_bar"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="@dimen/text_small"
+        android:id="@+id/detail_date" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_title"
-        android:layout_below="@+id/detail_date"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <TextView
-        android:text="TextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/detail_link"
-        android:layout_weight="1"
-        android:layout_below="@+id/detail_description"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="@dimen/text_normal"
+        android:textStyle="bold"
+        android:id="@+id/detail_title" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/detail_description"
-        android:layout_weight="1"
-        android:layout_below="@+id/detail_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="@dimen/text_normal"
+        android:id="@+id/detail_description" />
+
+    <Button
+        android:text="TextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/text_margin"
+        android:textSize="@dimen/text_small"
+        android:gravity="start"
+        android:textColor="@color/linkColor"
+        android:typeface="normal"
+        style="?android:attr/borderlessButtonStyle"
+        android:background="@android:color/white"
+        android:id="@+id/detail_link" />
 
 
-</RelativeLayout>
+</LinearLayout>

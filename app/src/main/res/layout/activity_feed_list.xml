@@ -2,8 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
     tools:context="com.example.user.rssreader.FeedListActivity">
@@ -18,7 +18,6 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:navigationIcon="@drawable/wifi"
             app:popupTheme="@style/Theme.AppCompat.Light.NoActionBar" />
 
     </android.support.design.widget.AppBarLayout>
@@ -28,5 +27,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     </ListView>
+    <TextView
+        android:id="@+id/empty_list_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:padding="@dimen/text_margin"
+        android:textSize="@dimen/text_big"
+        android:text="@string/emptyList"
+        android:visibility="gone" />
 
 </LinearLayout>

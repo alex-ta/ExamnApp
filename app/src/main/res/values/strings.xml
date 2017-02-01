@@ -6,6 +6,10 @@
     <string name="preference_shared_key">RSSSHAREPREFFOREXAMNAPP</string>
     <string name="preference_rss_key">RSSURLFOREXAMNAPP</string>
     <string name="intent_list_key">INTENTKEYLISTVIEW</string>
+    <string name="dialog_error_malformedurl">Please enter a valid url. It must match the scheme "http://www.someurl.com"</string>
+    <string name="error_empty_string">Please enter some url</string>
+    <string name="emptyList">No url passed or the url does not contain any rss item</string>
+
 
 
     <string name="ok">Ok</string>

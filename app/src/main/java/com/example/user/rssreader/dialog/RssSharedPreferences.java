@@ -2,6 +2,8 @@ package com.example.user.rssreader.dialog;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
+import android.util.Log;
 
 import com.example.user.rssreader.R;
 
@@ -13,8 +15,16 @@ public class RssSharedPreferences {
 
     private Context ctx;
     private SharedPreferences prv;
+    private static RssSharedPreferences instance;
 
-    public RssSharedPreferences(Context ctx){
+    public static RssSharedPreferences getInstance(Context ctx){
+        if (instance == null){
+            instance = new RssSharedPreferences(ctx);
+        }
+        return instance;
+    }
+
+    private RssSharedPreferences(Context ctx){
         this.ctx = ctx;
         this.prv = ctx.getSharedPreferences(ctx.getString(R.string.preference_shared_key), Context.MODE_PRIVATE);
     }
