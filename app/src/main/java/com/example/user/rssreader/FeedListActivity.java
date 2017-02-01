@@ -21,6 +21,7 @@ import android.widget.TextView;
 
 
 import com.example.user.rssreader.dialog.RssDialog;
+import com.example.user.rssreader.rssreader.AsyncReader;
 import com.example.user.rssreader.rssreader.Reader;
 import com.example.user.rssreader.rssreader.RssHolder;
 import com.example.user.rssreader.rssreader.RssListviewAdapter;
@@ -50,15 +51,10 @@ public class FeedListActivity extends AppCompatActivity {
         dialog = new RssDialog(this);
 
         RssHolder h = new RssHolder();
-        h.setDate(new Date());
         h.setDescription("Some Description");
         h.setLink("www.google.de");
         h.setTitle("Some Title");
-        try {
-            new Reader(null).start();
-        } catch (Exception e){
-            e.printStackTrace();
-        }
+        new AsyncReader().execute("http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml");
 
         final RssListviewAdapter adapter = new RssListviewAdapter(this);
         adapter.add(h);

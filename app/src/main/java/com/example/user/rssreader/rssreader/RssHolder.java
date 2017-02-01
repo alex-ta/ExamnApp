@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,16 +13,73 @@ import java.util.Date;
 
 public class RssHolder implements Serializable{
 
-    private Date date;
+    // äquivalent zu item
     private String title;
     private String description;
     private String link;
 
-    public Date getDate() {
+    private String date;
+    private String author;
+    private String category;
+    private String comments;
+    private String enclosure;
+    private String guid;
+    private String source;
+
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getComments() {
+        return comments;
+    }
+
+    public void setComments(String comments) {
+        this.comments = comments;
+    }
+
+    public String getEnclosure() {
+        return enclosure;
+    }
+
+    public void setEnclosure(String enclosure) {
+        this.enclosure = enclosure;
+    }
+
+    public String getGuid() {
+        return guid;
+    }
+
+    public void setGuid(String guid) {
+        this.guid = guid;
+    }
+
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.source = source;
+    }
+
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

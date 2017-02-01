@@ -6,6 +6,8 @@ import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserFactory;
 
 import java.net.URL;
+import java.text.DateFormat;
+import java.util.LinkedList;
 
 /**
  * Created by User on 31.01.2017.
@@ -27,24 +29,6 @@ public class Reader {
 
     public void start() {
 
-        try {
-            XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
-            factory.setNamespaceAware(false);
-            XmlPullParser xpp = factory.newPullParser();
-            xpp.setInput(url.openStream(), "UTF_8");
-
-            boolean insideItem = false;
-
-            // Returns the type of current event: START_TAG, END_TAG, etc..
-            int eventType = xpp.getEventType();
-            Log.d("read","readsdasd");
-            while (eventType != XmlPullParser.END_DOCUMENT) {
-                Log.d("Read", xpp.getName()+" "+xpp.getText());
-                eventType = xpp.next(); //move to next element
-            }
-        } catch (Exception e){
-            e.printStackTrace();
-        }
     }
 
     public void stop(){}
