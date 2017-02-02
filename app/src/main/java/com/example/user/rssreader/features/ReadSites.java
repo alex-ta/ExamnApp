@@ -8,6 +8,10 @@ import java.util.ArrayList;
 
 public class ReadSites {
 
+    /**
+     * Class containing the read lines
+     * */
+
     private ArrayList<String> readSitesBuffer;
 
     public ReadSites(){

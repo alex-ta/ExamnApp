@@ -42,7 +42,7 @@
         android:textAlignment="center"
         android:padding="@dimen/text_margin"
         android:textSize="@dimen/text_big"
-        android:text="@string/emptyList"
+        android:text="@string/emptyList_start"
         android:visibility="gone" />
 
 </LinearLayout>

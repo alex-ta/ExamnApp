@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 import com.example.user.rssreader.features.RssDialog;
@@ -41,6 +42,13 @@ public class FeedListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_list);
+        // create improtent instances
+        // readSites stores the clicked items
+        // adapter is the custom arrayadapter that creates the current list
+        // progressbar shows when feeds load
+        // reader reads the rss feeds
+        // dialog enables url change
+
         this.readSites = new ReadSites();
         this.adapter = new RssListviewAdapter(this, readSites);
         ProgressBar spinner=(ProgressBar)findViewById(R.id.progressBar);
@@ -58,11 +66,13 @@ public class FeedListActivity extends AppCompatActivity {
         });
         toolbar.setLogo(R.mipmap.ic_launcher);
 
-        ListView listview = (ListView) findViewById(R.id.feed_listview);
 
+        // the list of rss feeds and the empty view
+        ListView listview = (ListView) findViewById(R.id.feed_listview);
         listview.setEmptyView(findViewById(R.id.empty_list_view));
         listview.setAdapter(adapter);
 
+        // intent to the dateil view
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -83,6 +93,9 @@ public class FeedListActivity extends AppCompatActivity {
         super.onStart();
         readSites.setReadSitesBuffer(RssSharedPreferences.getInstance(this).getOpenedSites());
         checkEmptyUrl();
+        if(!RssSharedPreferences.getInstance(this).getUrl().isEmpty()){
+            ((TextView)this.findViewById(R.id.empty_list_view)).setText(this.getText(R.string.emptyList));
+        }
     }
 
     @Override
@@ -90,6 +103,9 @@ public class FeedListActivity extends AppCompatActivity {
         super.onResume();
         if(adapter != null){
             adapter.notifyDataSetChanged();
+        }
+        if(!RssSharedPreferences.getInstance(this).getUrl().isEmpty()){
+            ((TextView)this.findViewById(R.id.empty_list_view)).setText(this.getText(R.string.emptyList));
         }
     }
 
@@ -111,10 +127,8 @@ public class FeedListActivity extends AppCompatActivity {
         RssSharedPreferences.getInstance(this).saveOpenedSites(readSites.getReadSitesBuffer());
     }
 
-
-
-
     private void checkEmptyUrl(){
+        // checks if the url is empty, if so it shows the dialog after that load the data
         if(RssSharedPreferences.getInstance(this).getUrl().isEmpty()){
             dialog.show();
         }

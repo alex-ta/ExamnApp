@@ -20,6 +20,8 @@ public class RssReader {
     private ArrayAdapter<RssHolder> adapter;
     private ProgressBar bar;
 
+    // reader instantiates new Asynctasks in the background
+
     public RssReader(ArrayAdapter<RssHolder> adapter, ProgressBar bar){
         this.adapter = adapter;
         this.bar = bar;

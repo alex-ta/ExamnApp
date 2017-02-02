@@ -30,8 +30,14 @@ public class RssDialog extends Dialog{
     private ReadSites read;
     private RssSharedPreferences prev;
 
+    /**
+     * Dialog prompt for url
+     * */
+
     public RssDialog(final Activity ctx, final ReadSites read, RssReader _reader){
         super(ctx);
+
+        // set dialog layout
         this.read = read;
         this.reader = _reader;
         this.setTitle(R.string.title_rss_dialog);
@@ -42,6 +48,7 @@ public class RssDialog extends Dialog{
         this.text = (TextView) this.findViewById(R.id.dialog_title);
         this.edit = (EditText) this.findViewById(R.id.dialog_text);
 
+        // set existing url
         String url = prev.getUrl();
         if(!url.isEmpty()) {
             this.edit.setText(url);
@@ -50,6 +57,7 @@ public class RssDialog extends Dialog{
         this.error = (TextView) this.findViewById(R.id.dialog_error);
         this.ok = (Button) this.findViewById(R.id.dialog_ok);
 
+        // check url and set it in preferences
         this.ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -61,6 +69,7 @@ public class RssDialog extends Dialog{
                             read.clearReadTitles();
                         }
                         prev.saveUrl(edit.getText().toString());
+                        ((TextView)ctx.findViewById(R.id.empty_list_view)).setText(ctx.getText(R.string.emptyList));
                         reader.start(url);
                         hide();
                     } catch (Exception e) {
@@ -75,6 +84,7 @@ public class RssDialog extends Dialog{
 
             }
         });
+        // exits dialog and prompts toast on url error
         this.cancel = (Button) this.findViewById(R.id.dialog_cancel);
         this.cancel.setOnClickListener(new View.OnClickListener(){
 

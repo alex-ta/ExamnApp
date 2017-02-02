@@ -24,9 +24,15 @@ public class FeedDetailActivity extends AppCompatActivity {
     private TextView date, title, description, link;
     private Context ctx;
 
+    /**
+     * Displays on rss item
+     *
+     * */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // read the item from intent
         final RssHolder holder = (RssHolder) this.getIntent().getSerializableExtra(getApplicationContext().getString(R.string.intent_list_key));
         ctx = this;
         setContentView(R.layout.activity_feed_detail);
@@ -41,11 +47,14 @@ public class FeedDetailActivity extends AppCompatActivity {
         this.description = (TextView) this.findViewById(R.id.detail_description);
         this.link = (TextView) this.findViewById(R.id.detail_link);
 
+        // fill the view with data
         this.date.setText(holder.getDate().toString());
         this.title.setText(holder.getTitle());
         this.description.setText(holder.getDescription());
         this.link.setPaintFlags(this.link.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
         this.link.setText(holder.getLink());
+
+        // start browser on link click
         this.link.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -13,7 +13,7 @@ import java.util.Date;
 
 public class RssHolder implements Serializable{
 
-    // äquivalent zu item
+    // equivalent to rss item
     private String title;
     private String description;
     private String link;
@@ -26,27 +26,7 @@ public class RssHolder implements Serializable{
     private String guid;
     private String source;
 
-    // extra to navigate
-
-    private boolean visitedLink;
-    private boolean visitedWebsite;
-
-
-    public boolean isVisitedLink() {
-        return visitedLink;
-    }
-
-    public void setVisitedLink(boolean visitedLink) {
-        this.visitedLink = visitedLink;
-    }
-
-    public boolean isVisitedWebsite() {
-        return visitedWebsite;
-    }
-
-    public void setVisitedWebsite(boolean visitedWebsite) {
-        this.visitedWebsite = visitedWebsite;
-    }
+    // getter and setters
 
     public String getAuthor() {
         return author;

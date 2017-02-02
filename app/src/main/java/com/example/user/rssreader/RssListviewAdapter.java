@@ -32,13 +32,15 @@ public class RssListviewAdapter extends ArrayAdapter<RssHolder>{
 
     public RssListviewAdapter(Context context, ReadSites read) {
         super(context, R.layout.activity_single_line);
+        // base data arraylist with rss feeds
+        // object containing read lines
         this.list = new ArrayList<RssHolder>();
         this.read = read;
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-
+        // set one line on the listview
         View v = convertView;
 
         if (v == null) {
@@ -50,7 +52,7 @@ public class RssListviewAdapter extends ArrayAdapter<RssHolder>{
         RssHolder holder = list.get(position);
         if (holder != null) {
             TextView entry = (TextView) v.findViewById(R.id.rss_feed_line_entry);
-
+            // set text and design dependen on read lines
             if (entry != null) {
                 entry.setText(holder.getTitle());
                 if(read.contains(holder.getTitle())){
@@ -65,6 +67,8 @@ public class RssListviewAdapter extends ArrayAdapter<RssHolder>{
 
         return v;
     }
+
+    // methods changed to match list
 
     @Nullable
     @Override

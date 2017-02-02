@@ -18,6 +18,7 @@
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
         android:text="http://rss.nytimes.com/services/xml/rss/nyt/Politics.xml"
         android:id="@+id/dialog_text"
         android:layout_marginTop="@dimen/dalog_min_margin" />

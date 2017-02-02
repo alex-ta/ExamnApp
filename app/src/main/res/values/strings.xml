@@ -11,6 +11,7 @@
     <string name="dialog_error_malformedurl">Please enter a valid url. It must match the scheme "http://www.someurl.com"</string>
     <string name="error_empty_string">Please enter some url</string>
     <string name="emptyList">The url does not contain any rss item</string>
+    <string name="emptyList_start">Please provide an url</string>
     <string name="cancel_dialog">Please enter an url</string>
     <string name="dialog_warning_malformed">The url you left is not valid and will not be saved</string>
 

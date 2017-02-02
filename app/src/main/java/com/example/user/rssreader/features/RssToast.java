@@ -17,8 +17,13 @@ import com.example.user.rssreader.R;
 
 public class RssToast extends Toast{
 
+    /**
+     * Custom toast
+     * */
+
     public RssToast(Activity ctx) {
         super(ctx);
+        // setting layout duration and icon
         super.setDuration(Toast.LENGTH_LONG);
         this.layout = ctx.getLayoutInflater().inflate(R.layout.toast_rss, null);
         this.setView(layout);//setting the view of custom toast layout
@@ -31,6 +36,8 @@ public class RssToast extends Toast{
     public ImageView getImageView(){ return ((ImageView)this.layout.findViewById(R.id.custom_toast_image));}
     public LinearLayout getLinearLayout(){ return ((LinearLayout)this.layout.findViewById(R.id.custom_toast_layout));}
 
+
+    // setting text or icon
 
     public RssToast setText(String s){
         getTextView().setText(s);

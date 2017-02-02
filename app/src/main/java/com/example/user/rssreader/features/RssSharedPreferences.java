@@ -14,10 +14,15 @@ import java.util.HashSet;
 
 public class RssSharedPreferences {
 
+    /**
+     * Preferences for RSS app
+     * */
+
     private Context ctx;
     private SharedPreferences prv;
     private static RssSharedPreferences instance;
 
+    // singelton but dependent on context
     public static RssSharedPreferences getInstance(Context ctx){
         if (instance == null){
             instance = new RssSharedPreferences(ctx);
