@@ -57,7 +57,7 @@
         android:textColor="@color/linkColor"
         android:typeface="normal"
         style="?android:attr/borderlessButtonStyle"
-        android:background="@android:color/white"
+        android:background="@android:color/transparent"
         android:id="@+id/detail_link" />
 
 

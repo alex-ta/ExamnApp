@@ -1,12 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RSS Reader</string>
-
+    <string name="app_name">RSS NEWS</string>
     <string name="title_feed_detail">Feed Detail</string>
     <string name="title_rss_dialog">Rss Dialog</string>
     <string name="text_rss_dialog">Bitte geben Sie eine RSS Resource ein</string>
     <string name="preference_shared_key">RSSSHAREPREFFOREXAMNAPP</string>
-    <string name="preference_rss_key">RSSURLFOREXAMNAPP</string>
+    <string name="preference_rss_url">RSSURLFOREXAMNAPP</string>
+    <string name="preference_rss_read">RSSREADFOREXAMNAPP</string>
+    <string name="intent_list_key">INTENTKEYLISTVIEW</string>
+    <string name="dialog_error_malformedurl">Bitte geben Sie eine korrekte Url ein. Die Url sollte wie folgt aussehen "http://www.someurl.com"</string>
+    <string name="error_empty_string">Bitte geben Sie eine Url ein</string>
+    <string name="emptyList">Die Url verfügt über keine Rss Nachrichten</string>
+    <string name="cancel_dialog">Bitte fügen Sie eine Url hinzu</string>
+    <string name="dialog_warning_malformed">Die eingegebene Url stimmt nicht und wird nicht gespeichert</string>
+
 
     <string name="ok">Ok</string>
     <string name="ok_s">ok</string>

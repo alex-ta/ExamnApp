@@ -1,7 +1,10 @@
-package com.example.user.rssreader.rssreader;
+package com.example.user.rssreader;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.annotation.Nullable;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,10 +12,14 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.user.rssreader.R;
+import com.example.user.rssreader.features.ReadSites;
+import com.example.user.rssreader.rssreader.RssHolder;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 
 /**
  * Created by User on 31.01.2017.
@@ -21,9 +28,12 @@ import java.util.Comparator;
 public class RssListviewAdapter extends ArrayAdapter<RssHolder>{
 
     private ArrayList<RssHolder> list;
-    public RssListviewAdapter(Context context) {
+    private ReadSites read;
+
+    public RssListviewAdapter(Context context, ReadSites read) {
         super(context, R.layout.activity_single_line);
         this.list = new ArrayList<RssHolder>();
+        this.read = read;
     }
 
     @Override
@@ -43,6 +53,13 @@ public class RssListviewAdapter extends ArrayAdapter<RssHolder>{
 
             if (entry != null) {
                 entry.setText(holder.getTitle());
+                if(read.contains(holder.getTitle())){
+                    entry.setBackgroundColor(ContextCompat.getColor(v.getContext(), R.color.readSite));
+                    entry.setTypeface(Typeface.DEFAULT);
+                } else {
+                    entry.setBackgroundColor(parent.getDrawingCacheBackgroundColor());
+                    entry.setTypeface(Typeface.DEFAULT_BOLD);
+                }
             }
         }
 

@@ -6,4 +6,9 @@
     <color name="linkColor">#303F9F</color>
     <color name="linkColorUsed">#000044</color>
     <color name="errorText">#FF0000</color>
+    <color name="readSite">#44AAAAAA</color>
+    <color name="toast_background">#DDFFFFFF</color>
+    <color name="progressbar_color">#007DD6</color>
+    <color name="dialog_storke">#B1BCBE</color>
+
 </resources>

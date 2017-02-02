@@ -1,9 +1,8 @@
-package com.example.user.rssreader.dialog;
+package com.example.user.rssreader.features;
 
 import android.app.Activity;
 import android.graphics.drawable.Drawable;
 import android.support.v4.content.ContextCompat;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;

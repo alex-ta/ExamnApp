@@ -1,26 +1,25 @@
 package com.example.user.rssreader;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
-import com.example.user.rssreader.dialog.RssDialog;
-import com.example.user.rssreader.dialog.RssSharedPreferences;
-import com.example.user.rssreader.dialog.RssToast;
+import com.example.user.rssreader.features.RssDialog;
+import com.example.user.rssreader.features.RssSharedPreferences;
+import com.example.user.rssreader.features.ReadSites;
 import com.example.user.rssreader.rssreader.RssHolder;
-import com.example.user.rssreader.rssreader.RssListviewAdapter;
 import com.example.user.rssreader.rssreader.RssReader;
+
+import java.net.URL;
 
 /**
  * An activity representing a list of Feeds. This activity
@@ -33,15 +32,20 @@ import com.example.user.rssreader.rssreader.RssReader;
 public class FeedListActivity extends AppCompatActivity {
 
     private RssDialog dialog;
+    private ReadSites readSites;
+    private RssReader reader;
+    private RssListviewAdapter adapter;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed_list);
-        final RssListviewAdapter adapter = new RssListviewAdapter(this);
+        this.readSites = new ReadSites();
+        this.adapter = new RssListviewAdapter(this, readSites);
         ProgressBar spinner=(ProgressBar)findViewById(R.id.progressBar);
-        dialog = new RssDialog(this, new RssReader(adapter, spinner));
+        this.reader = new RssReader(adapter, spinner);
+        dialog = new RssDialog(this, readSites, reader);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -63,58 +67,61 @@ public class FeedListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 RssHolder holder = adapter.getItem(position);
+                Log.d("out", position+" "+holder.getTitle());
+                readSites.addReadTitle(holder.getTitle());
+                Log.d("s", readSites.getReadSitesBuffer().size()+"");
                 Intent inte = new Intent(FeedListActivity.this, FeedDetailActivity.class);
                 inte.putExtra(getApplicationContext().getString(R.string.intent_list_key),holder);
                 startActivity(inte);
             }
         });
-        checkEmptyUrl();
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        //
+        readSites.setReadSitesBuffer(RssSharedPreferences.getInstance(this).getOpenedSites());
+        checkEmptyUrl();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        //
+        if(adapter != null){
+            adapter.notifyDataSetChanged();
+        }
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        //
+        RssSharedPreferences.getInstance(this).saveOpenedSites(readSites.getReadSitesBuffer());
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        //
-    }
-
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        //
+        RssSharedPreferences.getInstance(this).saveOpenedSites(readSites.getReadSitesBuffer());
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        //
+        RssSharedPreferences.getInstance(this).saveOpenedSites(readSites.getReadSitesBuffer());
     }
 
 
 
 
     private void checkEmptyUrl(){
-        if(RssSharedPreferences.getInstance(this).readUrl().isEmpty()){
+        if(RssSharedPreferences.getInstance(this).getUrl().isEmpty()){
             dialog.show();
-            new RssToast(this).setText("Please enter an proper rss url").show();
+        }
+        try {
+            reader.start(new URL(RssSharedPreferences.getInstance(this).getUrl()));
+        } catch (Exception e){
+            e.printStackTrace();
         }
     }
 

@@ -1,24 +1,16 @@
 package com.example.user.rssreader;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.CollapsingToolbarLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.NavUtils;
-import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.user.rssreader.dialog.RssSharedPreferences;
 import com.example.user.rssreader.rssreader.RssHolder;
 
 /**

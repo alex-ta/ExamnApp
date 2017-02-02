@@ -3,7 +3,6 @@
       xmlns:app="http://schemas.android.com/apk/res-auto"
       xmlns:tools="http://schemas.android.com/tools"
       tools:context=".FeedListActivity">
-
     <item
         android:icon="@drawable/wifi"
         android:id="@+id/rss_menu"

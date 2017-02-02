@@ -1,14 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">RSS Reader</string>
+    <string name="app_name">RSS NEWS</string>
     <string name="title_feed_detail">Feed Detail</string>
     <string name="title_rss_dialog">Rss Dialog</string>
     <string name="text_rss_dialog">Please insert a RSS resource</string>
     <string name="preference_shared_key">RSSSHAREPREFFOREXAMNAPP</string>
-    <string name="preference_rss_key">RSSURLFOREXAMNAPP</string>
+    <string name="preference_rss_url">RSSURLFOREXAMNAPP</string>
+    <string name="preference_rss_read">RSSREADFOREXAMNAPP</string>
     <string name="intent_list_key">INTENTKEYLISTVIEW</string>
     <string name="dialog_error_malformedurl">Please enter a valid url. It must match the scheme "http://www.someurl.com"</string>
     <string name="error_empty_string">Please enter some url</string>
     <string name="emptyList">The url does not contain any rss item</string>
+    <string name="cancel_dialog">Please enter an url</string>
+    <string name="dialog_warning_malformed">The url you left is not valid and will not be saved</string>
 
 
 

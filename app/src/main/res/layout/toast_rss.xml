@@ -3,14 +3,16 @@
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
-    android:layout_margin="10dp"
+    android:background="@drawable/toast"
+    android:layout_margin="@dimen/toast_margin"
     android:id="@+id/custom_toast_layout">
 
     <ImageView
         android:id="@+id/custom_toast_image"
         android:layout_width="@dimen/img_height"
         android:layout_height="@dimen/img_height"
+        android:orientation="vertical"
+        android:layout_gravity="center_vertical"
         android:src="@mipmap/ic_launcher"/>
 
     <TextView
